@@ -23,7 +23,7 @@ To run this project, install it locally using for example cmd:
 
 ```
 pip install pandas 
-pip instal pycountry
+pip install pycountry
 ```
 To check how is this working you can use an example of CSV file with data (data taken from 'Internship Tasks') which is added to the project.
 
