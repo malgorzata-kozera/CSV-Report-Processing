@@ -60,20 +60,11 @@ def creating_csv_file():
 
         df = open_csv(name_csv)
 
-        # converts argument to datetime.
-
         df['Date'] = pd.to_datetime(df['Date'])
-
-        # creating a new column 'Country' with 3 letter country code for each state
 
         df['Country'] = df['State Name'].apply(find_code)
 
-        # for all arguments in column 'CRT' uses strip() function, which deletes '%' sign.
-
         df['CRT'] = df['CRT'].map(lambda x: x.strip('%'))
-
-        # converts all elements(num) (in CRT) to floating point numbers.
-        # creates new column 'Clicks' - The product of 'impression' and 'CRT'.
 
         for num in df['CRT']:
             float_digit = float(num)
@@ -81,15 +72,11 @@ def creating_csv_file():
 
         df['Clicks'] = round(df['Impression'] * (df['CRT'] / 100))
 
-        # converts all elements (in 'Clicks') to integers. Next removes unnecessary columns.
-
         df['Clicks'] = df['Clicks'].astype(int)
 
         df.drop('CRT', 1, inplace=True)
 
         df.drop('State Name', 1, inplace=True)
-
-        # Arranges a new database in the right order, group by date,country (sorts alphabetically)
 
         df = df[['Date', 'Country', 'Impression', 'Clicks']]
 
@@ -114,3 +101,6 @@ def creating_csv_file():
 
 
 creating_csv_file()
+
+if __name__ == "__main__":
+    creating_csv_file()
