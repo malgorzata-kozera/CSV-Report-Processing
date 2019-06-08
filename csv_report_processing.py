@@ -2,18 +2,16 @@ import pycountry
 import pandas as pd
 import sys
 
-"""
-find_code()
-
-Function  which uses Pycountry library. 
-This function takes as an argument the country subdivision name(state name),then it looks for
-subdivision's country code(ISO 3166-2 2-two-letter country code). Next it looks for the matching country code
-alpha-3 (three-letter cede).   
-Returns code alpha-3.
-"""
-
 
 def find_code(city_name):
+    """
+    Function  which uses Pycountry library.
+    This function takes as an argument the country subdivision name(state name),
+    then it looks for subdivision's country code(ISO 3166-2 2-two-letter country
+    code). Next it looks for the matching country code alpha-3
+    (three-letter cede).
+    Returns code alpha-3.
+    """
 
     try:
         code_2 = pycountry.subdivisions.lookup(city_name)
@@ -24,15 +22,14 @@ def find_code(city_name):
         return 'XXX'
 
 
-"""
-open_csv()
-This function takes as an argument name of the csv file. 
-File should be located in the same directory as this python script.
-Function tries to open csv file in UTF-8 encoding, if it fails it opens with UTF-16.
-"""
-
-
 def open_csv(csv_file):
+    """
+    open_csv()
+    This function takes as an argument name of the csv file.
+    File should be located in the same directory as this python script.
+    Function tries to open csv file in UTF-8 encoding, if it fails it opens
+    with UTF-16.
+    """
 
     columns_names = ['Date', 'State Name', 'Impression', 'CRT']
 
@@ -45,14 +42,11 @@ def open_csv(csv_file):
     return file
 
 
-"""
-creating_csv_file()
-Creates a csv file with transformed data.
-"""
-
-
 def creating_csv_file():
-
+    """
+    creating_csv_file()
+    Creates a csv file with transformed data.
+    """
     try:
 
         name_csv = input('Please enter name of  your CSV file (including extension).\n'
@@ -87,7 +81,8 @@ def creating_csv_file():
         # saves converted data frame in new csv file
         try:
 
-            df.to_csv(f'output_{name_csv}', header=False, encoding='utf-8', line_terminator='\n')
+            df.to_csv(f'output_{name_csv}', header=False, encoding='utf-8',
+                      line_terminator='\n')
             print('New cvs file with your data has been created')
 
         except Exception as e:
@@ -99,8 +94,6 @@ def creating_csv_file():
         print(e, file=sys.stderr)
         print("\nCouldn't create an output file")
 
-
-creating_csv_file()
 
 if __name__ == "__main__":
     creating_csv_file()
