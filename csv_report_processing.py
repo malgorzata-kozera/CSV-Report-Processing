@@ -79,20 +79,21 @@ def creating_csv_file():
         df.sort_values(['Date', 'Country'], ascending=True)
 
         # saves converted data frame in new csv file
+
         try:
 
             df.to_csv(f'output_{name_csv}', header=False, encoding='utf-8',
                       line_terminator='\n')
             print('New cvs file with your data has been created')
 
-        except Exception as e:
+        except ValueError as e:
             print(e, file=sys.stderr)
-            print("\nCouldn't create an output file")
+            print("\nCouldn't create an output file. Unknown format")
 
-    except Exception as e:
+    except FileNotFoundError as e:
         print('\nError occured:')
         print(e, file=sys.stderr)
-        print("\nCouldn't create an output file")
+        print("\nCouldn't create an output file. File not found")
 
 
 if __name__ == "__main__":
